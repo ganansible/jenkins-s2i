@@ -151,6 +151,7 @@ if [ ! -e ${JENKINS_HOME}/configured ]; then
     mkdir -p ${JENKINS_HOME}/plugins
     echo "Copying $(ls /opt/openshift/plugins | wc -l) Jenkins plugins to ${JENKINS_HOME} ..."
     cp -r /opt/openshift/plugins/* ${JENKINS_HOME}/plugins/
+    find /opt/openshift/plugins/ -name '*.jpi' -type f -printf '%f\n' | while read FILE; do touch  ${JENKINS_HOME}/plugins/${FILE}.pinned; done
     #rm -rf /opt/openshift/plugins
   fi
 
